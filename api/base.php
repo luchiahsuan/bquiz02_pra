@@ -155,7 +155,7 @@ function q($sql){
 
 $Total = new DB('total');
 
-if (!isset($_SEESION['total'])) {
+if (!isset($_SESSION['total'])) {
     $today = $Total->find(['date' => date("Y-m-d")]);
     if (empty($today)) {
         $today=['date' => date("Y-m-d"), 'total' => 1];
@@ -163,5 +163,9 @@ if (!isset($_SEESION['total'])) {
         $today['total']++;
         $Total->save($today);
     }
-    $_SEESION['total']=1;
+    $_SESSION['total']=1;
 }
+
+$User = new DB('user');
+
+

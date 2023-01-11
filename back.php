@@ -40,7 +40,26 @@
 						請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章
 					</marquee>
 					<span style="width:18%; display:inline-block;">
-						<a href="?do=login">會員登入</a>
+					<?php
+						if (isset($_SESSION['login'])) {
+							if ($_SESSION['login'] == 'admin') {
+						?>
+								歡迎，<?= $_SESSION['login']; ?>
+								<button> <a href="back.php">管理</a> </button>
+								<button> <a href="index.php">登出</a> </button>
+							<?php
+							} else {
+							?>
+								歡迎，<?= $_SESSION['login']; ?>
+								<button> <a href="index.php">登出</a> </button>
+							<?php
+							}
+						} else {
+							?>
+							<a href="?do=login">會員登入</a>
+						<?php
+						}
+						?>
 					</span>
 					<div class="">
 						<?php

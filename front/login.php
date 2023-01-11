@@ -7,7 +7,7 @@
         </tr>
         <tr>
             <td>密碼</td>
-            <td><input type="text" name="pw" id="pw"></td>
+            <td><input type="password" name="pw" id="pw"></td>
         </tr>
         <tr>
             <td>
@@ -33,20 +33,28 @@
             pw: $("#pw").val()
         }
         $.post("./api/chk_acc.php", user, (result) => {
+            console.log(result);
+
             if (parseInt(result) === 1) {
+                console.log(result);
                 $.post("./api/chk_pw.php", user, (result) => {
                     if (parseInt(reslut) === 1) {
+            console.log(result);
+                        
                         if (user.acc === 'admin') {
-                            location.href = 'bacl.php';
+                            location.href = 'back.php';
                         } else {
-                            location = 'index.php';
+                            location.href = 'index.php';
                         }
                     } else {
                         alert("密碼錯誤")
+                        reset()
                     }
                 })
             } else {
-                alert("查無帳號");
+                alert("查無帳號")
+                reset()
+
             }
         })
     }

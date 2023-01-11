@@ -23,7 +23,8 @@ include "./api/base.php";
 	<iframe name="back" style="display:none;"></iframe>
 	<div id="all">
 		<div id="title">
-			<?=date("m月d號 l");?> | 今日瀏覽: <?=$Total->find(['date'=>date("Y-m-d")])['total'];?> | 累積瀏覽: <?=$Total->sum('total');?> 
+			<?= date("m月d號 l"); ?> | 今日瀏覽: <?= $Total->find(['date' => date("Y-m-d")])['total']; ?> | 累積瀏覽: <?= $Total->sum('total'); ?>
+
 			<a href="index.php" style="float: right;">回首頁</a>
 		</div>
 		<div id="title2">
@@ -45,7 +46,26 @@ include "./api/base.php";
 						請民眾踴躍投稿電子報，讓電子報成為大家相互交流、分享的園地！詳見最新文章
 					</marquee>
 					<span style="width:18%; display:inline-block;">
-						<a href="?do=login">會員登入</a>
+						<?php
+						if (isset($_SESSION['login'])) {
+							if ($_SESSION['login'] == 'admin') {
+						?>
+								歡迎，<?= $_SESSION['login']; ?>
+								<button>管理</button>
+								<button>登出</button>
+							<?php
+							} else {
+							?>
+								歡迎，<?= $_SESSION['login']; ?>
+								<button>登出</button>
+							<?php
+							}
+						} else {
+							?>
+							<a href="?do=login">會員登入</a>
+						<?php
+						}
+						?>
 					</span>
 					<div class="">
 						<?php
@@ -53,10 +73,10 @@ include "./api/base.php";
 						$file = "./front/" . $do . ".php";
 						if (file_exists($file)) {
 							include $file;
-						}else{
+						} else {
 							include "index.php";
 						}
-					
+
 
 						?>
 					</div>

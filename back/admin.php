@@ -1,38 +1,41 @@
 <fieldset>
-<legend>帳號管理</legend>
-<form action="./api/del_acc.php" method="post">
-<?php
-$rows=$User->all();
-?>
-<table>
-    <tr>
-        <td>帳號</td>
-        <td>密碼</td>
-        <td>刪除</td>
-    </tr>
+    <legend>帳號管理</legend>
+    <form action="./api/del_acc.php" method="post">
+        <?php
+        $rows = $User->all();
+        ?>
+        <table>
+            <tr>
+                <td>帳號</td>
+                <td>密碼</td>
+                <td>刪除</td>
+            </tr>
+            <?php
+            foreach ($rows as $row) {
+
+            ?>
+                <tr>
+                    <td><?= $row['acc']; ?></td>
+                    <td>
+                        <?= str_repeat("*", $row['pw']); ?>
+                        <input type="password" name="pw" value="<?=$row['pw'];?>">
+                    </td>
+                    <td><input type="checkbox" name="<?= $row['id']; ?>"></td>
+                    <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                </tr>
+        </table>
     <?php
-foreach($rows as$row){
+            }
+    ?>
 
-?>
-    <tr>
-        <td><?=$row['acc'];?></td>
-        <td><?=$row['pe'];?></td>
-        <td><input type="checkbox" name="<?=$row['id'];?>"></td>
-    <input type="hidden" name="id" value="<?=$row['id'];?>">
-    </tr>
-</table>
-<?php
-}
-?>
+    <div class="ct">
+        <input type="submit" value="確定刪除">
+        <input type="reset" value="清空選取">
+    </div>
 
-<div class="ct">
-    <input type="submit" value="確定刪除">
-    <input type="reset" value="清空選取">
-</div>
+    </form>
 
-</form>
-
-<h2>新增會員</h2>
+    <h2>新增會員</h2>
     <div style="color:red">
         *請設定您要註冊的帳號及密碼(最長12個字元)
     </div>

@@ -167,5 +167,6 @@ if (!isset($_SESSION['total'])) {
 }
 
 $User = new DB('user');
+$News = new DB('news');
 
 

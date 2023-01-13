@@ -5,6 +5,8 @@
         border: 1px solid grey;
         margin-left: -1px;
         background-color: #eee;
+        cursor: pointer;
+
     }
 
     .box {

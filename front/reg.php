@@ -39,11 +39,11 @@
     function reg() {
         let user = {
             acc: $("#acc").val(),
-            pw: $("#acc").val(),
-            pw2: $("#acc").val(),
-            email: $("#acc").val()
+            pw: $("#pw").val(),
+            pw2: $("#pw2").val(),
+            email: $("#email").val()
         }
-        if (user.acc == '' || user.pw == '' || user.pw2 == '' || user.email == '') {
+        if (user.acc === '' || user.pw === '' || user.pw2 == '' || user.email == '') {
             alert('欄位不可空白')
         } else {
             if (user.pw == user.pw2) {
@@ -52,9 +52,10 @@
                         alert('帳號重複')
                     } else {
                         $.post("./api/reg.php",user,()=>{
+                            alert('完成註冊，歡迎加入')
+                        reset();
                             
                         })
-                        alert('完成註冊，歡迎加入')
                     }
                 })
             } else {

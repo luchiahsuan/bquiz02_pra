@@ -48,7 +48,19 @@
                         ?>
 
                 </td>
-                <td></td>
+                <td>
+                    <span class="num"><?= $Log->count(['news' => $row['id']]); ?></span>
+                    個人說
+                    <img src="./icon/02B03.jpg" style="width:20px;height:20px">
+                    <?php
+                    if (isset($_SESSION['login'])) {
+                        echo "<a href='#' onclick='good('{$row['id']}','{$_SESSION['login']}')' class='good' data-user='{$_SESSION['login']}' data-news='{$row['id']}'>";
+                        echo "讚";
+                        echo "</a>";
+                    }
+
+                    ?>
+                </td>
             </tr>
         <?php
         }
@@ -84,4 +96,8 @@
         function() {
             $(this).next().children('.full').hide()
         })
+
+    function good(news, acc) {
+
+    }
 </script>

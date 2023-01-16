@@ -33,7 +33,16 @@
                     <div class="short"><?= mb_substr($row['text'], 0, 25)."..."; ?></div>
                     <div class="full"><?= nl2br($row['text']); ?></div>
                 </td>
-                <td></td>
+                <td>
+                    <?php
+                    if (isset($_SESSION['login'])) {
+                        echo "<a href='#' onclick='good('{$row['id']}','{$_SESSION['login']}')' class='good' data-user='{$_SESSION['login']}' data-news='{$row['id']}'>";
+                        echo "讚";
+                        echo "</a>";
+                    }
+
+                    ?>
+                </td>
             </tr>
         <?php
         }

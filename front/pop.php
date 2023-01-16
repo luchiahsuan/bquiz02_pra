@@ -54,9 +54,15 @@
                     <img src="./icon/02B03.jpg" style="width:20px;height:20px">
                     <?php
                     if (isset($_SESSION['login'])) {
-                        echo "<a href='#' onclick='good('{$row['id']}','{$_SESSION['login']}')' class='good' data-user='{$_SESSION['login']}' data-news='{$row['id']}'>";
-                        echo "讚";
-                        echo "</a>";
+                        if ($Log->count(['news' => $row['news'], 'user' => $_SESSION['login']]) > 0) {
+                            echo "<a href='#' class='good' data-user='{$_SESSION['login']}' data-news='{$row['id']}'>";
+                            echo "收回讚";
+                            echo "</a>";
+                        } else {
+                            echo "<a href='#' class='good' data-user='{$_SESSION['login']}' data-news='{$row['id']}'>";
+                            echo "讚";
+                            echo "</a>";
+                        };
                     }
 
                     ?>
@@ -96,8 +102,13 @@
         function() {
             $(this).next().children('.full').hide()
         })
+    $(".full").hover(
+        function() {
+            $(this).show();
+        },
+        function() {
+            $(this).hide();
+        }
 
-    function good(news, acc) {
-
-    }
+    )
 </script>

@@ -1,3 +1,23 @@
+<style>
+    .full {
+        display: none;
+        position: absolute;
+        background-color: rgb(100, 100, 100);
+        z-index: 99;
+        padding: 1rem;
+        box-shadow: 0 0 10px #999;
+        left: -10px;
+        top: -5px;
+        height: 500px;
+        overflow: auto;
+        width: 95%;
+    }
+
+    .news-title {
+        cursor: pointer;
+        background-color: #eee;
+    }
+</style>
 <fieldset>
     <legend>目前位置：首頁 > 最新文章區</legend>
     <table>
@@ -18,8 +38,16 @@
         foreach ($rows as $row) {
         ?>
             <tr>
-                <td><?= $row['title']; ?></td>
-                <td><?= mb_substr($row['text'], 0, 25); ?></td>
+                <td class="news-title"><?= $row['title']; ?></td>
+                <td style="position: relative;">
+                    <div class="short"><?= mb_substr($row['text'], 0, 25) . "..."; ?></div>
+                    <div class="full">
+                        <?php
+                        echo "<div style='color:skyblue'>" . $row['type'] . "</div>";
+                        echo "<div style='color:white'>" . nl2br($row['text']) . "</div>";
+                        ?>
+
+                </td>
                 <td></td>
             </tr>
         <?php
@@ -48,3 +76,12 @@
 
     </div>
 </fieldset>
+<script>
+    $(".news-title").hover(
+        function() {
+            $(this).next().children('.full').show()
+        },
+        function() {
+            $(this).next().children('.full').hide()
+        })
+</script>
